@@ -1,11 +1,32 @@
 - defaults:
     link:
-      relink: true
-      
+      create: true
+      force: true
+
 - clean: ['~']
+
+- shell:
+  - [git submodule update --init --recursive, Updating submodules]
 
 - link:
     ~/.gitconfig: gitconfig
     ~/.zshrc: zshrc
+    # ~/.gitignore_global: gitignore_global
+    # ~/.ssh/config: ssh/config
 
+- shell:
+  - description: Install oh-my-zsh
+    command: '[ -z "$ZSH_VERSION" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || :'
+    stdout: true
+    stdin: true
+  - description: Install Homebrew
+    command: 'command -v brew >/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+    stdout: true
+    stdin: true
+  - description: Symlink iCloud Drive
+    command: bash -c "ln -sF ~/Library/Mobile\ Documents/com~apple~CloudDocs/ ~/iCloud"
+    stdout: true
+    stdin: true
 
+- create:
+    - ~/dev
