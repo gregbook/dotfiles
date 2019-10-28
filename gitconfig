@@ -4,4 +4,4 @@
 	name = Gregor Arzouyan
 	email = gregor.arzouyan@gmail.com
 [core]
-	excludesfile = /Users/Gregor/.gitignore_global
+	excludesfile = ~/.gitignore_global
