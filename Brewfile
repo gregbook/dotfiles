@@ -2,6 +2,7 @@ cask_args appdir: "/Applications"
 
 # Taps
 tap "weaveworks/tap"
+tap "homebrew/cask-fonts"
 
 # Install Brew Packages
 brew "coreutils"
@@ -26,6 +27,7 @@ brew "go"
 brew "mas"
 brew "youtube-dl"
 brew "minikube"
+brew "npm"
 
 # Install Casks
 cask "docker"
@@ -51,6 +53,8 @@ cask "quicklook-json"
 cask "qlimagesize"
 cask "knockknock"
 cask "postman"
+cask "font-inconsolata"
+cask "macmediakeyforwarder"
 
 # Install MAS Applications
 mas "Amphetamine", id: 937984704
