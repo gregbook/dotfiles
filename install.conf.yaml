@@ -2,31 +2,33 @@
     link:
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - shell:
-  - command: [git pull, Updating dotfiles]
-    stdout: true
-  - command: [git submodule update --init --recursive, Updating submodules]
-    stdout: true
+    - command: [git pull, Updating dotfiles]
+      stdout: true
+    - command: [git submodule update --init --recursive, Updating submodules]
+      stdout: true
 
 - shell:
-  - description: Install oh-my-zsh
-    command: '[ -z "$ZSH_VERSION" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || :'
-    stdout: true
-    stdin: true
-  - description: Install Homebrew
-    command: 'command -v brew >/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
-    stdout: true
-    stdin: true
-  - description: Symlink iCloud Drive
-    command: bash -c "ln -sfn ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud"
-    stdout: true
-    stdin: true
+    - description: Install oh-my-zsh
+      command: '[ -z "$ZSH_VERSION" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || :'
+      stdout: true
+      stdin: true
+    - description: Install Homebrew
+      command: 'command -v brew >/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+      stdout: true
+      stdin: true
+    - description: Symlink iCloud Drive
+      command: bash -c "ln -sfn ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud"
+      stdout: true
+      stdin: true
 
 - brewfile:
     file: Brewfile
+    no-upgrade: true
     stderr: true
+    stdout: true
 
 - link:
     ~/.gitconfig: gitconfig
@@ -36,9 +38,26 @@
     ~/.ptpython/config.py: ptpython/config.py
     ~/.oh-my-zsh/custom/themes/awsomepanda.zsh-theme: awsomepanda.zsh-theme
 
+- link:
+    "~/Library/Application Support/Code/User/settings.json": vscode/settings.json
+    "~/Library/Application Support/Code/User/keybindings.json": vscode/keybindings.json
+
+- vscodefile:
+    file: vscode/extensions
+
 - create:
     - ~/dev
 
+# Cleaning up:
 - shell:
-  - [echo "Please run manually scripts/post-install-mac.sh to finalize the installation", Post Install Message]
-  - [chmod +x scripts/post-install-mac.sh]
+    - description: Brew cleaning up
+      command: brew cleanup
+      stdout: true
+      stdin: true
+
+- shell:
+    - [
+        echo "Please run manually scripts/post-install-mac.sh to finalize the installation",
+        Post Install Message,
+      ]
+    - [chmod +x scripts/post-install-mac.sh]
