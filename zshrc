@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="custom_awsomepanda"
+ZSH_THEME="awsomepanda"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -18,7 +18,7 @@ ZSH_THEME="custom_awsomepanda"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker aws)
+plugins=(docker aws git kubectl encode64 python)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -53,32 +53,19 @@ alias myip='curl -4 ifconfig.co'                    # myip:         Public facin
 alias netCons='lsof -i'                             # netCons:      Show all open TCP/IP sockets
 alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
 alias lsock='lsof -i -P'                            # lsock:        Display open sockets
-alias lsockU='lsof -nP -iUDP'                  # lsockU:       Display only open UDP sockets
-alias lsockT='lsof -nP -iTCP'                  # lsockT:       Display only open TCP sockets
+alias lsockU='lsof -nP -iUDP'                       # lsockU:       Display only open UDP sockets
+alias lsockT='lsof -nP -iTCP'                       # lsockT:       Display only open TCP sockets
 alias ipInfo0='ipconfig getpacket en0'              # ipInfo0:      Get info on connections for en0
 alias ipInfo1='ipconfig getpacket en1'              # ipInfo1:      Get info on connections for en1
 alias openPorts='lsof -iTCP -sTCP:LISTEN'           # openPorts:    All listening connections
 
 #   ---------------------------
-#   . AWS
-#   ---------------------------
-
-# aws-mfa() {${HOME}/dev/aws-cli-mfa "$1" "$2"}
-
-#   ---------------------------
 #   . PATH
 #   ---------------------------
 
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-export PATH="$PATH:/usr/local/opt/ruby/bin"
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/python/libexec/bin:$PATH"
-
-#   ---------------------------
-#   . GO
-#   ---------------------------
-
 export GOPATH="${HOME}/.go"
-export GOROOT="/usr/local/opt/go/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 #   -------------------------
 #   4.  CUSTOM
@@ -88,8 +75,6 @@ export EDITOR='code'
 export KUBE_EDITOR='code --wait'
 export LC_ALL=en_US.UTF-8
 
-alias bfg=java -jar ~/dev/bfg-1.13.0.jar
-alias tf=terraform
 alias ll='gls --color=auto --group-directories-first -lh'
 alias l='gls --color=auto --group-directories-first -lah'
 

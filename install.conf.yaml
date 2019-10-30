@@ -1,12 +1,14 @@
 - defaults:
     link:
-      create: true
-      force: true
+      relink: true
 
 - clean: ['~']
 
 - shell:
-  - [git submodule update --init --recursive, Updating submodules]
+  - command: [git pull, Updating dotfiles]
+    stdout: true
+  - command: [git submodule update --init --recursive, Updating submodules]
+    stdout: true
 
 - shell:
   - description: Install oh-my-zsh
@@ -22,15 +24,21 @@
     stdout: true
     stdin: true
 
-# Won't log in the console
 - brewfile:
     file: Brewfile
+    stderr: true
 
 - link:
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore_global
     ~/.zshrc: zshrc
     ~/.ssh/config: config
+    ~/.ptpython/config.py: ptpython/config.py
+    ~/.oh-my-zsh/custom/themes/awsomepanda.zsh-theme: awsomepanda.zsh-theme
 
 - create:
     - ~/dev
+
+- shell:
+  - [echo "Please run manually scripts/post-install-mac.sh to finalize the installation", Post Install Message]
+  - [chmod +x scripts/post-install-mac.sh]
