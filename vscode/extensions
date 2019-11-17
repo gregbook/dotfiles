@@ -1,8 +1,15 @@
 eamodio.gitlens
-mauve.terraform
 ms-python.python
 EditorConfig.EditorConfig
 PKief.material-icon-theme
 redhat.vscode-yaml
-vscoss.vscode-ansible
 ms-azuretools.vscode-docker
+#vscoss.vscode-ansible
+#mauve.terraform
+
+#Pipedrive Specific 
+waderyan.nodejs-extension-pack
+esbenp.prettier-vscode
+sleistner.vscode-fileutils
+CoenraadS.bracket-pair-colorizer
+VisualStudioExptTeam.vscodeintellicode
