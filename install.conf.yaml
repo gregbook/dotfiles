@@ -1,32 +1,26 @@
 - defaults:
     link:
       relink: true
+    shell:
+      stdout: true
+      stderr: true
 
 - clean: ["~"]
 
 - shell:
     - command: [git pull, Updating dotfiles]
-      stdout: true
     - command: [git submodule update --init --recursive, Updating submodules]
-      stdout: true
 
 - shell:
     - description: Install oh-my-zsh
       command: '[ -z "$ZSH_VERSION" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || :'
-      stdout: true
-      stdin: true
     - description: Install Homebrew
       command: 'command -v brew >/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
-      stdout: true
-      stdin: true
     - description: Symlink iCloud Drive
       command: bash -c "ln -sfn ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud"
-      stdout: true
-      stdin: true
 
 - brewfile:
     file: Brewfile
-    no-upgrade: true
     stderr: true
     stdout: true
 
@@ -47,17 +41,20 @@
 
 - create:
     - ~/dev
+    - ~/git
+
+- shell:
+    - description: Install plugin zsh-autosuggestions
+      command: "git clone -f https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2> /dev/null || :"
 
 # Cleaning up:
 - shell:
     - description: Brew cleaning up
       command: brew cleanup
-      stdout: true
-      stdin: true
 
 - shell:
+    - [chmod +x scripts/post-install-mac.sh]
     - [
         echo "Please run manually scripts/post-install-mac.sh to finalize the installation",
         Post Install Message,
       ]
-    - [chmod +x scripts/post-install-mac.sh]
