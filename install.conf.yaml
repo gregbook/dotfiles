@@ -1,10 +1,11 @@
 - defaults:
     link:
+      create: true
       relink: true
     shell:
       stdout: true
       stderr: true
-
+  
 - clean: ["~"]
 
 - shell:
@@ -19,10 +20,10 @@
     - description: Symlink iCloud Drive
       command: bash -c "ln -sfn ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud"
 
-- brewfile:
-    file: Brewfile
-    stderr: true
-    stdout: true
+# - brewfile:
+#     file: Brewfile
+#     stderr: true
+#     stdout: true
 
 - link:
     ~/.gitconfig: gitconfig
@@ -30,7 +31,10 @@
     ~/.zshrc: zshrc
     ~/.ssh/config: config
     ~/.ptpython/config.py: ptpython/config.py
-    ~/.oh-my-zsh/custom/themes/awsomepanda.zsh-theme: awsomepanda.zsh-theme
+    ~/.oh-my-zsh/custom/themes/custom.zsh-theme: custom.zsh-theme
+    ~/.git-templates:
+      path: git-templates
+      force: true
 
 - link:
     "~/Library/Application Support/Code/User/settings.json": vscode/settings.json
@@ -42,7 +46,8 @@
 - create:
     - ~/dev
     - ~/git
-
+    - ~/.hushlogin
+    
 - shell:
     - description: Install plugin zsh-autosuggestions
       command: "git clone -f https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2> /dev/null || :"

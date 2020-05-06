@@ -1,7 +1,6 @@
 cask_args appdir: "/Applications"
 
 # Taps
-tap "weaveworks/tap"
 tap "homebrew/cask-fonts"
 
 # Install Brew Packages
@@ -20,14 +19,13 @@ brew "kubernetes-cli"
 brew "kubectx"
 brew "jq"
 brew "nmap"
-brew "eksctl"
 brew "htop"
 brew "packer"
 brew "go"
 brew "mas"
 brew "youtube-dl"
 brew "minikube"
-brew "npm"
+#brew "npm"
 
 # Install Casks
 cask "docker"

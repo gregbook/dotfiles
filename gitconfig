@@ -5,6 +5,7 @@
 	email = gregor.arzouyan@pipedrive.com
 [core]
 	excludesfile = /Users/gregorarzouyan/.gitignore_global
+	editor = code --wait
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	last = log -1 HEAD --pretty=full
@@ -13,3 +14,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	templatedir = ~/.git-templates

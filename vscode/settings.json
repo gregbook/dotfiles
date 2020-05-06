@@ -1,26 +1,130 @@
 {
     "window.zoomLevel": 0,
-    "explorer.confirmDelete": true,
+    "window.restoreWindows": "none",
+    "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "workbench.statusBar.feedback.visible": false,
     "workbench.sideBar.location": "left",
     "workbench.iconTheme": "material-icon-theme",
+    "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
     "git.enableSmartCommit": true,
     "files.autoSave": "afterDelay",
-    "terminal.external.osxExec": "iTerm.app",
-    "terminal.explorerKind": "external",
-    "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.fontFamily": "Inconsolata",
     "terminal.integrated.fontSize": 14,
-    "terminal.integrated.fontWeight": "bold",
     "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.cwd": "${fileDirname}",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.shellArgs.osx": [],
     "editor.renderWhitespace": "all",
     "editor.suggestSelection": "first",
+    "editor.minimap.enabled": false,
     "python.venvPath": "~/dev/venv",
     "python.formatting.provider": "autopep8",
     "python.pythonPath": "/Users/gregorarzouyan/dev/venv/bin/python",
     "python.autoComplete.addBrackets": true,
     "git.autofetch": true,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "git.confirmSync": false,
+    "extensions.ignoreRecommendations": false,
+    "yaml.schemas": {
+        "file:///Users/gregorarzouyan/.vscode/extensions/atlassian.atlascode-2.5.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "atlascode.bitbucket.enabled": false,
+    "atlascode.showWelcomeOnInstall": false,
+    "atlascode.jira.jqlList": [
+        {
+            "enabled": true,
+            "id": "d2ec9f41-0483-4e35-8b6e-e1a14c9846ca",
+            "monitor": true,
+            "name": "Selected for Development",
+            "query": "project = DTL AND status = \"Selected for Development\" AND assignee in (EMPTY)",
+            "siteId": "a795b18a-954a-4719-ae3d-4070063f893b"
+        },
+        {
+            "enabled": true,
+            "id": "4aaa34b6-b279-4f06-9287-3a11714af210",
+            "monitor": true,
+            "name": "My Pipedrive Issues",
+            "query": "assignee = currentUser() AND status not in (\"Won't do\",\"Done\") ORDER BY lastViewed DESC",
+            "siteId": "a795b18a-954a-4719-ae3d-4070063f893b"
+        },
+        {
+            "enabled": true,
+            "id": "ab20bda7-1714-48dc-b15f-27862a7ada2a",
+            "monitor": true,
+            "name": "Done",
+            "query": "project = DTL AND status = \"Done\" AND assignee in (gregor.arzouyan)",
+            "siteId": "a795b18a-954a-4719-ae3d-4070063f893b"
+        }
+    ],
+    "atlascode.jira.hover.enabled": true,
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "editor.multiCursorModifier": "alt",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "python.jediEnabled": false,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.colorCustomizations" : {
+        "[CodeSandbox]": {
+            "statusBar.noFolderBackground": "#40494d80",
+            "statusBar.background": "#40494d80",
+            "button.background": "#528bff",
+            "button.foreground": "#ffffff",
+            "button.hoverBackground": "#6087cf",
+            "list.focusBackground": "#2c313a66",
+            "list.hoverBackground": "#2c313a66",
+            "editorGroup.dropBackground": "#2b32354b",
+            "editor.lineHighlightBackground" : "#3d3e413a",
+            "activityBar.background": "#40494d80",
+            "problemsWarningIcon.foreground": "#cca700",
+            "badge.background": "#528bff",
+            "badge.foreground": "#d7dae0",
+        },
+
+        // "editor.selectionForeground": "#ff0000", // Doesn't work https://github.com/microsoft/vscode/issues/36490
+        
+        // "statusBar.background": "#c71b1b",
+        // "sideBar.background": "#191c21",
+
+        // "editor.selectionBackground": "#7877268e",
+        // "editor.selectionHighlightBackground": "#e6070776",
+
+        // "editor.background": "#232830",
+        // "editor.foreground": "#d4d4d4",
+        // "activityBar.background": "#292c34",
+
+        // "editor.selectionBackground": "#10799693",
+        // "editor.findMatchBackground": "#2d8a4c6f", //Current SEARCH MATCH
+        // "editor.findMatchHighlightBackground": "#00cc445a" //Other SEARCH MATCHES
+    },
+    "peacock.vslsShareColor": "#215732",
+    "peacock.vslsJoinColor": "#007fff",
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "docker.containers.groupBy": "State",
+    "docker.volumes.groupBy": "CreatedTime",
+    "atlascode.jira.statusbar.showProduct": false,
+    "atlascode.jira.statusbar.enabled": true,
+    "atlascode.jira.statusbar.showUser": true,
+    "atlascode.jira.statusbar.showLogin": true,
+    "atlascode.jira.statusbar.showActiveIssue": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.activityBar.visible": true,
+    "editor.renderControlCharacters": false,
+    "atlascode.jira.lastCreateSiteAndProject": {
+        "siteId": "a795b18a-954a-4719-ae3d-4070063f893b",
+        "projectKey": "DTL"
+    },
+    "editor.occurrencesHighlight": false,
+    "editor.selectionHighlight": true,
+    "editor.formatOnType": true,
+    "liveshare.presence": true,
+    "liveshare.account": "",
+    "workbench.statusBar.visible": true,
+    "workbench.colorTheme": "CodeSandbox",
+    "diffEditor.renderSideBySide": false,
+    "diffEditor.ignoreTrimWhitespace": false
 }
