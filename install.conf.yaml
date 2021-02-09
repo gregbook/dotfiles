@@ -9,32 +9,35 @@
 - clean: ["~"]
 
 - shell:
-    - command: [git pull, Updating dotfiles]
-    - command: [git submodule update --init --recursive, Updating submodules]
+    - command: [git pull --quiet, Updating dotfiles]
+    - command: [git submodule update --init --recursive --quiet, Updating submodules]
 
 - shell:
     - description: Install oh-my-zsh
-      command: '[ -z "$ZSH_VERSION" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || :'
+      command: '[ ! -d ~/.oh-my-zsh ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || :'
     - description: Install Homebrew
-      command: 'command -v brew >/dev/null || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+      command: 'command -v brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
+      stdin: true
     - description: Symlink iCloud Drive
       command: bash -c "ln -sfn ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/iCloud"
 
-# - brewfile:
-#     file: Brewfile
-#     stderr: true
-#     stdout: true
+- brewfile:
+    file: brew/Brewfile
+    stderr: true
+    stdout: true
 
 - link:
-    ~/.gitconfig: gitconfig
-    ~/.gitignore_global: gitignore_global
-    ~/.zshrc: zshrc
-    ~/.ssh/config: config
-    ~/.ptpython/config.py: ptpython/config.py
-    ~/.oh-my-zsh/custom/themes/custom.zsh-theme: custom.zsh-theme
+    ~/.gitconfig: git/gitconfig
+    ~/.gitignore_global: git/gitignore_global
     ~/.git-templates:
-      path: git-templates
+      path: git/git-templates
       force: true
+    ~/.zshrc: 
+      path: zsh/zshrc
+      force: true
+    ~/.oh-my-zsh/custom/themes/custom.zsh-theme: zsh/custom.zsh-theme
+    ~/.ssh/config: ssh/config
+    ~/.ptpython/config.py: ptpython/config.py
 
 - link:
     "~/Library/Application Support/Code/User/settings.json": vscode/settings.json
@@ -46,11 +49,6 @@
 - create:
     - ~/dev
     - ~/git
-    - ~/.hushlogin
-    
-- shell:
-    - description: Install plugin zsh-autosuggestions
-      command: "git clone -f https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2> /dev/null || :"
 
 # Cleaning up:
 - shell:
@@ -59,7 +57,6 @@
 
 - shell:
     - [chmod +x scripts/post-install-mac.sh]
-    - [
-        echo "Please run manually scripts/post-install-mac.sh to finalize the installation",
-        Post Install Message,
-      ]
+    - description: Run Post Scripts
+      command: '[ ! -f ./scripts/executed.txt ] && sh ./scripts/post-install-mac.sh || :'
+      stdin: true

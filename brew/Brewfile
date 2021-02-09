@@ -8,40 +8,26 @@ brew "coreutils"
 brew "openssl"
 brew "git"
 brew "python"
-brew "ansible"
-brew "terraform"
 brew "vim"
 brew "zsh"
 brew "zsh-syntax-highlighting"
 brew "zsh-completions"
-brew "awscli"
-brew "kubernetes-cli"
-brew "kubectx"
 brew "jq"
-brew "nmap"
 brew "htop"
-brew "packer"
-brew "go"
 brew "mas"
 brew "youtube-dl"
-brew "minikube"
-#brew "npm"
 
 # Install Casks
+cask "google-chrome"
 cask "docker"
 cask "the-unarchiver"
-cask "vagrant"
-cask "virtualbox"
 cask "iterm2"
-cask "slack"
 cask "menumeters"
 cask "visual-studio-code"
 cask "iina"
 cask "spectacle"
 cask "appcleaner"
 cask "spotify"
-cask "skype"
-cask "fliqlo"
 cask "keka"
 cask "lulu"
 cask "qlcolorcode"
@@ -50,11 +36,34 @@ cask "qlmarkdown"
 cask "quicklook-json"
 cask "qlimagesize"
 cask "knockknock"
-cask "postman"
 cask "font-inconsolata"
+cask "font-jetbrains-mono"
 cask "macmediakeyforwarder"
+cask "gpg-suite"
 
-# Install MAS Applications
-mas "Amphetamine", id: 937984704
-mas "Be Focused", id: 973134470
-mas "Noizio", id: 928871589
+# Misc
+#cask "skype"
+cask "fliqlo"
+
+# Work Related Packages
+#brew "ansible"
+#brew "terraform"
+#brew "awscli"
+#brew "kubernetes-cli"
+#brew "kubectx"
+#brew "nmap"
+#brew "packer"
+#brew "go"
+#brew "minikube"
+#brew "npm"
+#cask "slack"
+#cask "postman"
+#cask "virtualbox"
+#cask "vagrant"
+
+# Install MAS Applications (to run manually with mas cli)
+# mas "Amphetamine", id: 937984704
+# mas "Noizio", id: 928871589
+# mas "Flow", id: 1423210932
+# mas "DigiDoc4 Client", id: 1370791134
+# mas "Tera", id: 1243347809

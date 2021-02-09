@@ -3,7 +3,6 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export NVM_AUTO_USE=true
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -17,13 +16,10 @@ ZSH_THEME="custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    docker    
+    docker
     git
-    kube-ps1
-    kubectl
     encode64
     zsh-navigation-tools
-    zsh-nvm
 )
 
 # Plugins not used
@@ -48,14 +44,11 @@ source $ZSH/oh-my-zsh.sh
 
 alias cp='cp -iv'                                   # Preferred 'cp' implementation
 alias mv='mv -iv'                                   # Preferred 'mv' implementation
-# alias mkdir='mkdir -pv'                             # Preferred 'mkdir' implementation
+alias mkdir='mkdir -pv'                             # Preferred 'mkdir' implementation
 alias less='less -FSRXc'                            # Preferred 'less' implementation
 alias f='open -a Finder ./'                         # f:            Opens current directory in MacOS Finder
 alias c='clear'                                     # c:            Clear terminal display
 alias path='echo -e ${PATH//:/\\n}'                 # path:         Echo all executable Paths
-
-# Use the built-in take function
-# mcd () { mkdir "$1" && cd "$1"; }                   # mcd:          Makes new Dir and jumps inside
 
 #   ---------------------------
 #   2.  SEARCHING
@@ -82,26 +75,15 @@ alias eth-info='networksetup -getinfo USB\ 10/100/1000\ LAN'    # ipInfo1:      
 #   . PATH
 #   ---------------------------
 
-export GOPATH="${HOME}/.go"
-export PATH="$PATH:${GOPATH}/bin"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 #   -------------------------
 #   4.  CUSTOM
 #   ------------------------
 
-totp() { oathtool --totp -b $(<~/".totp_${1:-google}") | pbcopy; }
-
-# ZSH AWS Plugin Option
-SHOW_AWS_PROMPT=true
-
 export LC_ALL=en_US.UTF-8
 export EDITOR='code'
-export KUBE_EDITOR='code --wait'
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=60"
-export KUBE_PS1_COLOR_CONTEXT="%F{yellow}"
-export KUBE_PS1_COLOR_NS="%F{green}"
+export GPG_TTY=$(tty)
 
 # Reuse of zsh directories lib
 alias ll='ls --group-directories-first -lh'
@@ -128,57 +110,3 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # Enable docker-compose completion
 fpath+=($ZSH/plugins/docker)
-
-autoload -U compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-source /Library/Application\ Support/com.canonical.multipass/Resources/completions/bash/multipass
-
-# #   -------------------------
-# #   5.  PIPEDRIVE
-# #   ------------------------
-source /Users/gregorarzouyan/.github
-
-export KUBE_PS1_ENABLED=off
-export KUBECONFIG=~/.kube/config:~/.kube/k8s-1-eu-central-1-live.config:~/.kube/k8s-1-eu-central-1-test.config:~/.kube/k8s-1-management-live.config:~/.kube/k8s-1-management-test.config:~/.kube/k8s-1-us-east-1-live.config:~/.kube/k8s-1-us-east-1-test.config:~/.kube/k8s-2-eu-central-1-live.config:~/.kube/k8s-2-eu-central-1-test.config:~/.kube/k8s-2-management-live.config:~/.kube/k8s-2-management-test.config:~/.kube/k8s-2-us-east-1-live.config:~/.kube/k8s-2-us-east-1-test.config:~/.kube/k8s-3-eu-central-1-live.config:~/.kube/k8s-3-eu-central-1-test.config:~/.kube/k8s-3-us-east-1-live.config:~/.kube/k8s-3-us-east-1-test.config:~/.kube/k8s-3-testbox-test.config
-
-export CONSUL_HTTP_ADDR=192.168.46.100:8500
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-# List images of containers by pod widely
-# Can add a sort -nr to sort by amount
-alias kgpiw="kubectl get pods --all-namespaces -o jsonpath='{.items[*].spec.containers[*].image}' | tr -s '[[:space:]]' '\n' | sort | uniq -c"
-
-# List images of containers by single pod
-alias kgpi="kubectl get pod -o jsonpath='{range .spec.containers[*]}{.image}{"\n"}{end}'"
-
-# export NVM_LAZY_LOAD=true
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-## Add docker context
-get-context(){
-if [[ $PROMPT == *"$CONTEXT_PROMPT"* ]]; then
-    PROMPT=${${PROMPT}#${CONTEXT_PROMPT}}
-    PROMPT="${PROMPT#"${PROMPT%%[![:space:]]*}"}"
-fi
-DOCKER_CONTEXT=$(grep currentContext ~/.docker/config.json|cut -f4 -d\")
-if [[ ! -z "$DOCKER_CONTEXT" ]]; then
-case $DOCKER_CONTEXT in
-  testbox*)
-    CONTEXT_PROMPT="%F{green}($DOCKER_CONTEXT)%f"
-    ;;
-  
-  *test*)
-    CONTEXT_PROMPT="%F{yellow}($DOCKER_CONTEXT)%f"
-    ;;
-  
-  *)
-    CONTEXT_PROMPT="%F{red}($DOCKER_CONTEXT)%f"
-    ;;
-
-esac
-PROMPT="$CONTEXT_PROMPT $PROMPT"
-fi
-}
-add-zsh-hook precmd get-context
-get-context

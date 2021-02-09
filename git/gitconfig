@@ -2,7 +2,7 @@
 	tool = code
 [user]
 	name = Gregor Arzouyan
-	email = gregor.arzouyan@pipedrive.com
+	email = gregor.arzouyan@gmail.com
 [core]
 	excludesfile = /Users/gregorarzouyan/.gitignore_global
 	editor = code --wait
@@ -16,3 +16,7 @@
 	required = true
 [init]
 	templatedir = ~/.git-templates
+# [commit]
+# 	gpgsign = true
+# [gpg]
+# 	program = gpg
