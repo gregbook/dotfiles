@@ -20,8 +20,8 @@ plugins=(
     git
     encode64
     kube-ps1
+    kubectl
     zsh-navigation-tools
-    # zsh-nvm
     zsh-better-npm-completion
 )
 
@@ -146,7 +146,7 @@ export KUBE_PS1_ENABLED=off
 export CONSUL_HTTP_ADDR=192.168.46.100:8500
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
 
 fpath+=(/Users/gregorarzouyan/.k8s-workstation)
 source $HOME/.github
