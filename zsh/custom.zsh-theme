@@ -6,7 +6,7 @@ else # normal
   PROMPT="%F{cyan}%~ %(?.%F{green}.%F{red})❯%f "
 fi
 
-RPROMPT='%{$fg[green]%}$(git_prompt_info)%{$reset_color%}'
+RPROMPT='$(git_prompt_info)$(kube_ps1)'
 # RPROMPT='[%*]'
 # RPROMPT='$(aws_prompt_info)'" $RPROMPT"
 # RPROMPT='$(aws_prompt_info)'
@@ -14,7 +14,7 @@ RPROMPT='%{$fg[green]%}$(git_prompt_info)%{$reset_color%}'
 ZSH_THEME_AWS_PREFIX="%{$fg[red]%}("
 ZSH_THEME_AWS_SUFFIX=")%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="("
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%})%{$fg[yellow]%} ✗ %{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=") "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}[✗] %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=""

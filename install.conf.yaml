@@ -28,6 +28,9 @@
 
 - link:
     ~/.gitconfig: git/gitconfig
+    ~/.config/alacritty/alacritty.yml: 
+      path: alacritty/alacritty.yml
+      force: true
     ~/.gitignore_global: git/gitignore_global
     ~/.git-templates:
       path: git/git-templates

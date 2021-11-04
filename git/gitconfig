@@ -1,8 +1,9 @@
 [merge]
-	tool = code
+	tool = code --wait
 [user]
 	name = Gregor Arzouyan
-	email = gregor.arzouyan@gmail.com
+	email = gregor.arzouyan@pipedrive.com
+	signingkey = 7C13A073601F6FD8
 [core]
 	excludesfile = /Users/gregorarzouyan/.gitignore_global
 	editor = code --wait
@@ -16,7 +17,9 @@
 	required = true
 [init]
 	templatedir = ~/.git-templates
-# [commit]
-# 	gpgsign = true
-# [gpg]
-# 	program = gpg
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[github]
+	user = gregbook

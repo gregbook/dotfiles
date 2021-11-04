@@ -15,6 +15,4 @@ if [ $? -ne 0 ]; then
     exit
 fi
 # issue key matched from branch prefix, prepend to commit message
-TEMP=`mktemp /tmp/commitmsg-XXXXX`
-(echo "$ISSUE_KEY - $(cat  $1)") > $TEMP
-cat $TEMP > $1
+sed -i -e "1 s/^/$ISSUE_KEY - /" $1

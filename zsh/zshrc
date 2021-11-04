@@ -19,17 +19,19 @@ plugins=(
     docker
     git
     encode64
+    kube-ps1
     zsh-navigation-tools
+    # zsh-nvm
+    zsh-better-npm-completion
 )
 
 # Plugins not used
 # aws
-# zsh-nvm
 # zsh-autosuggestions
-# zsh-better-npm-completion
-# git
 
 # Used by gls and by .oh-my-zsh/lib/theme-and-appearance.zsh
+
+DISABLE_MAGIC_FUNCTIONS=true
 
 export LS_COLORS="di=1;34:ln=1;35:so=1;31:pi=1;33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 # export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
@@ -44,11 +46,11 @@ source $ZSH/oh-my-zsh.sh
 
 alias cp='cp -iv'                                   # Preferred 'cp' implementation
 alias mv='mv -iv'                                   # Preferred 'mv' implementation
-alias mkdir='mkdir -pv'                             # Preferred 'mkdir' implementation
 alias less='less -FSRXc'                            # Preferred 'less' implementation
 alias f='open -a Finder ./'                         # f:            Opens current directory in MacOS Finder
 alias c='clear'                                     # c:            Clear terminal display
 alias path='echo -e ${PATH//:/\\n}'                 # path:         Echo all executable Paths
+alias fpath='echo -e ${FPATH//:/\\n}'               # fpath:        Echo all fpath directories
 
 #   ---------------------------
 #   2.  SEARCHING
@@ -67,15 +69,24 @@ alias flushDNS='dscacheutil -flushcache'                        # flushDNS:     
 alias lsock='lsof -i -P'                                        # lsock:        Display open sockets
 alias lsockU='lsof -nP -iUDP'                                   # lsockU:       Display only open UDP sockets
 alias lsockT='lsof -nP -iTCP'                                   # lsockT:       Display only open TCP sockets
-alias openPorts='lsof -iTCP -sTCP:LISTEN'                       # openPorts:    All listening connections
+alias openPorts='lsof -nP -iTCP -sTCP:LISTEN'                   # openPorts:    All listening connections
 alias wifi-info='networksetup -getinfo Wi-Fi'                   # wifi-info:    Get info on connections for Wifi
 alias eth-info='networksetup -getinfo USB\ 10/100/1000\ LAN'    # ipInfo1:      Get info on connections for en1
 
 #   ---------------------------
-#   . PATH
+#    PATH
 #   ---------------------------
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+# export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/Users/gregorarzouyan/Library/Python/3.9/bin:$PATH"
+export GOPATH="${HOME}/go"
+export GOPRIVATE=github.com/pipedrive
+export PATH=$PATH:$GOPATH/bin
+export PATH="/usr/local/opt/curl/bin:$PATH"
+export GPG_TTY=$(tty)
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 #   -------------------------
 #   4.  CUSTOM
@@ -83,7 +94,10 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 export LC_ALL=en_US.UTF-8
 export EDITOR='code'
-export GPG_TTY=$(tty)
+export KUBE_EDITOR='code --wait'
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=60"
+export KUBE_PS1_COLOR_CONTEXT="%F{yellow}"
+export KUBE_PS1_COLOR_NS="%F{green}"
 
 # Reuse of zsh directories lib
 alias ll='ls --group-directories-first -lh'
@@ -91,8 +105,12 @@ alias l='la --group-directories-first'
 alias change="code ~/.zshrc"
 alias update="exec zsh"
 
+# List images of containers by pod widely
+# Can add a sort -nr to sort by amount
+alias kgpiw="kubectl get pods --all-namespaces -o jsonpath='{.items[*].spec.containers[*].image}' | tr -s '[[:space:]]' '\n' | sort | uniq -c"
+
 # curl-loop 
-curl-loop() { i=1; while true; do echo "$(gdate "+%Y/%m/%d - %T.%3N") - $i - ${1} - $(curl -I ${1} -w "%{http_code}" -s -o /dev/null)"; i=$[$i+1]; sleep ${2:-0.5}; done }
+curl-loop() { i=1; while true; do echo "$(gdate "+%Y/%m/%d - %T.%3N") - $i - ${1} - $(curlj ${1} -w "%{http_code}" -s -o /dev/null)"; i=$[$i+1]; sleep ${2:-0.5}; done }
 
 bindkey -e
 bindkey \^u backward-kill-line
@@ -105,8 +123,34 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[root]='bg=196,fg=black,bold'
 ZSH_HIGHLIGHT_STYLES[line]='none'
 
+# zsh-navigation-tools n-history configuration
+znt_history_active_text='reverse'
+
 # Take advantage of $LS_COLORS for completion as well.
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
+# To debug 
+# zstyle ":completion:*:descriptions" format "%B%d%b" 
+
+# Docker Stacking option 
+zstyle ':completion:*:*:docker:*' option-stacking yes
+
 # Enable docker-compose completion
 fpath+=($ZSH/plugins/docker)
+
+# #   -------------------------
+# #   5.  PIPEDRIVE
+# #   ------------------------
+
+export KUBE_PS1_ENABLED=off
+export CONSUL_HTTP_ADDR=192.168.46.100:8500
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+fpath+=(/Users/gregorarzouyan/.k8s-workstation)
+source $HOME/.github
+
+autoload -U compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+export KUBECONFIG=~/.kube/config:~/.kube/k8s-1-dashboard.us-east-1.pipedrive.net.config:~/.kube/k8s-1-dashboard.us-east-1.pipedrive.com.config:~/.kube/k8s-2-dashboard.us-east-1.pipedrive.com.config:~/.kube/k8s-3-dashboard.us-east-1.pipedrive.com.config:~/.kube/k8s-1-dashboard.eu-central-1.pipedrive.net.config:~/.kube/k8s-1-dashboard.eu-central-1.pipedrive.com.config:~/.kube/k8s-2-dashboard.eu-central-1.pipedrive.com.config:~/.kube/k8s-3-dashboard.eu-central-1.pipedrive.com.config:~/.kube/k8s-2-dashboard.pipedrivetest.tools.config:~/.kube/k8s-2-dashboard.pipedrive.tools.config:~/.kube/k8s-1-dashboard.tll-m3.pipedrive.dev.config:~/.kube/k8s-2-dashboard.tll-m3.pipedrive.dev.config:~/.kube/k8s-1-dashboard.pipedrive.xyz.config:~/.kube/k8s-3-dashboard.pipedrive.xyz.config:~/.kube/k8s-4-dashboard.pipedrive.xyz.config
