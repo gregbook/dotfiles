@@ -1,4 +1,4 @@
-#### ******************************** CONFIGURE ZSH BY DEFAULT *****************************
+#### ******************************** CONFIGURE ZSH BREW INSTALL BY DEFAULT ****************
 sudo sh -c "echo $(which zsh) >> /etc/shells"
 chsh -s $(which zsh)
 
@@ -12,7 +12,10 @@ defaults write com.apple.screencapture type JPG
 # Show ~/Library in $HOME folder
 chflags nohidden ~/Library/
 
-# FINDER : Show Path/Status Bar, List view, extensions
+# Sound effects
+defaults write NSGlobalDomain com.apple.sound.beep.sound /System/Library/Sounds/Blow.aiff
+
+# Show Path/Status Bar, List view, extensions
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string “Nlsv”
 defaults write com.apple.finder ShowPathbar -bool true
@@ -41,15 +44,22 @@ sudo defaults write NSGlobalDomain KeyRepeat -int 1
 # Keystroke time delay
 sudo defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
-## SHOW PERCENTAGE IN BATTERY STATUS
-defaults write com.apple.menuextra.battery ShowPercent -string "YES"
-defaults write com.apple.menuextra.battery ShowTime -string "NO"
+## CONTROL CENTER SETTINGS
+defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist BatteryShowPercentage -bool true
+defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist Sound -int 18
+defaults write ~/Library/Preferences/ByHost/com.apple.controlcenter.plist NowPlaying -int 2
+
+## TOUCHBAR SETTINGS
+defaults write com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip
+defaults write com.apple.touchbar.agent PresentationModeFnModes '<dict><key>fullControlStrip</key><string>functionKeys</string></dict>'
+defaults write com.apple.controlstrip FullCustomized '("com.apple.system.group.brightness","com.apple.system.group.keyboard-brightness","com.apple.system.group.media","com.apple.system.group.volume","com.apple.system.screen-lock","com.apple.system.do-not-disturb")'
+sudo pkill ControlStrip TouchBarServer
 
 ## DOCK Settings
 # No delay
 defaults write com.apple.dock.autohide-delay -float 0
 # Minimum text size
-defaults write com.apple.dock tilesize -int 39
+defaults write com.apple.dock tilesize -int 45
 # Magnification off
 defaults write com.apple.dock magnification -bool false
 
@@ -71,11 +81,11 @@ defaults write com.apple.dock wvous-br-modifier -int 0
 defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/System/Applications/Calendar.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/System/Applications/Notes.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/System/Applications/Reminders.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Telegram.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
-defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Iina.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Visual Studio Code.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Alacritty.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/System/Applications/System Preferences.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
