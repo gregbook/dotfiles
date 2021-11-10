@@ -923,6 +923,8 @@
 	<false/>
 	<key>FocusOnRightOrMiddleClick</key>
 	<false/>
+	<key>HTMLTabTitles</key>
+	<false/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideActivityIndicator</key>
@@ -932,7 +934,7 @@
 	<key>HideScrollbar</key>
 	<false/>
 	<key>HideTab</key>
-	<true/>
+	<false/>
 	<key>HideTabNumber</key>
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
@@ -1298,7 +1300,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1.01</real>
+			<real>1</real>
 			<key>Icon</key>
 			<integer>1</integer>
 			<key>Idle Code</key>
@@ -1615,11 +1617,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>AcademyEngravedLetPlain 12</string>
+			<string>JetBrainsMonoMedium-Medium 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>JetBrainsMonoMedium-Medium 12</string>
+			<string>JetBrainsMono-Regular 12</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Open Toolbelt</key>
@@ -1996,7 +1998,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<true/>
+			<false/>
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
@@ -2078,13 +2080,13 @@
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.13888242464539011</real>
+	<real>0.099184951619373726</real>
 	<key>StartDebugLoggingAutomatically</key>
 	<true/>
 	<key>StatusBarPosition</key>
 	<integer>1</integer>
 	<key>StretchTabsToFillBar</key>
-	<true/>
+	<false/>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>5</integer>
 	<key>TabViewType</key>

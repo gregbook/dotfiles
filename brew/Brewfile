@@ -41,6 +41,8 @@ cask "gpg-suite"
 cask "telegram"
 cask "publii"
 cask "blackhole-16ch"
+cask "pictogram"
+cask "imageoptim"
 
 # Misc
 #cask "skype"

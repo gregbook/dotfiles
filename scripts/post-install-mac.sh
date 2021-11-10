@@ -5,6 +5,9 @@ chsh -s $(which zsh)
 #### ************************* MAC PARAMETERS CONFIGURATION ********************************
 echo "Setting up Mac configuration parameters"
 
+# Screenshots in JPG
+defaults write com.apple.screencapture type JPG
+
 ### FINDER
 # Show ~/Library in $HOME folder
 chflags nohidden ~/Library/
@@ -43,6 +46,8 @@ defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 defaults write com.apple.menuextra.battery ShowTime -string "NO"
 
 ## DOCK Settings
+# No delay
+defaults write com.apple.dock.autohide-delay -float 0
 # Minimum text size
 defaults write com.apple.dock tilesize -int 39
 # Magnification off
